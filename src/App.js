@@ -1,11 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
 
+import Navbar from "./Navbar";
+import Login from './components/Login';
+
 function App() {
   return (
-    <div className="App">
+    <div style={{background: "rgb(245, 245, 255)"}} className="App">
+      {/* <Navbar/> */}
+      <Login/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <button type="button" class="btn btn-primary">Primary</button>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
