@@ -9,8 +9,9 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
     />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
@@ -18,7 +19,8 @@
 </head>
 
 <body style="background-color: rgb(245, 245, 245);">
-    <div style="max-width: 400px;" class="card my-5 mx-auto">
+    <!-- login_form -->
+    <!-- <div style="max-width: 400px;" class="card my-5 mx-auto">
         <img width="175px" class="mx-auto py-4" src="../public/Instagram_logo.svg">
         <form class="mx-4 card-body">
             <div class="d-grid"><button type="link" class="btn btn-primary btn-sm"><i class="bi bi-facebook"></i> Continue with Facebook</button></div>
@@ -29,7 +31,102 @@
             <div class="d-grid"><button type="submit" class="btn btn-primary">Log In</button></div>
             <div class="mt-4 text-center text-muted"><small>Don't have an account? <a href="#" class="link-primary text-decoration-none">Sign Up</a></small></div>
         </form>
-    </div>
-</body>
+    </div> -->
+    
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-light bg-white sticky-top">
+        <div class="container-sm">
+          <a class="navbar-brand" href="#">
+            <img src="https://uxwing.com/wp-content/themes/uxwing/download/10-brands-and-social-media/instagram-text.svg" alt="logo" width="100">
+          </a>
+          <ul class="navbar-nav fs-5">
+            <div class="collapse navbar-collapse">
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-house-door"></i></a>
+              </li>
+              <li class="nav-item">
+                <button type="button" class="btn nav-link" data-bs-toggle="modal" data-bs-target="#create">
+                  <i class="bi bi-plus-square fs-5"></i>
+                </button>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="bi bi-compass"></i></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="bi bi-heart"></i></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="bi bi-send"></i></a>
+              </li>
+            </div>
+            <li class="nav-item">
+              <a class="nav-link" href="#"><i class="bi bi-person-circle"></i></a>
+           </li>
+          </ul>
+        </div>
+      </nav>
+    <nav class="navbar navbar-expand navbar-light bg-white fixed-bottom d-sm-none">
+      <ul class="container-fluid navbar-nav fs-5">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-house-door"></i></a>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="btn nav-link" data-bs-toggle="modal" data-bs-target="#create">
+            <i class="bi bi-plus-square fs-5"></i>
+          </button>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="bi bi-compass"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-heart"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-send"></i></a>
+        </li>
+      </ul>
+      </nav>
+    <!-- create -->
+    <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
+  Launch static backdrop modal
+</button> -->
 
+<!-- Modal -->
+<div class="modal fade" id="create" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create new post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-sm-5">
+        <div class="mb-3">
+          <div class="m-5 w-50 mx-auto "><svg color="#262626" fill="#262626" viewBox="0 0 97.6 77.3"><path d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z" fill="currentColor"></path><path d="M84.7 18.4L58 16.9l-.2-3c-.3-5.7-5.2-10.1-11-9.8L12.9 6c-5.7.3-10.1 5.3-9.8 11L5 51v.8c.7 5.2 5.1 9.1 10.3 9.1h.6l21.7-1.2v.6c-.3 5.7 4 10.7 9.8 11l34 2h.6c5.5 0 10.1-4.3 10.4-9.8l2-34c.4-5.8-4-10.7-9.7-11.1zM7.2 10.8C8.7 9.1 10.8 8.1 13 8l34-1.9c4.6-.3 8.6 3.3 8.9 7.9l.2 2.8-5.3-.3c-5.7-.3-10.7 4-11 9.8l-.6 9.5-9.5 10.7c-.2.3-.6.4-1 .5-.4 0-.7-.1-1-.4l-7.8-7c-1.4-1.3-3.5-1.1-4.8.3L7 49 5.2 17c-.2-2.3.6-4.5 2-6.2zm8.7 48c-4.3.2-8.1-2.8-8.8-7.1l9.4-10.5c.2-.3.6-.4 1-.5.4 0 .7.1 1 .4l7.8 7c.7.6 1.6.9 2.5.9.9 0 1.7-.5 2.3-1.1l7.8-8.8-1.1 18.6-21.9 1.1zm76.5-29.5l-2 34c-.3 4.6-4.3 8.2-8.9 7.9l-34-2c-4.6-.3-8.2-4.3-7.9-8.9l2-34c.3-4.4 3.9-7.9 8.4-7.9h.5l34 2c4.7.3 8.2 4.3 7.9 8.9z" fill="currentColor"></path><path d="M78.2 41.6L61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6l-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z" fill="currentColor"></path></svg></div>
+          <input class="form-control" type="file" id="formFile">
+        </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-sm btn-primary">Post</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- profile -->
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="..." class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
 </html>
