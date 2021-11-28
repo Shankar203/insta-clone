@@ -1,12 +1,13 @@
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
-const Login = () => {
+const SignUp = () => {
 	const navigate = useNavigate();
 	const emailRef = useRef();
 	const passwordRef = useRef();
+	const passwordConfirmRef = useRef();
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -14,16 +15,20 @@ const Login = () => {
 	const handleSubmit = async function (e) {
 		e.preventDefault();
 		try {
-			setError("");
-			setLoading(true);
-			const userCred = await signInWithEmailAndPassword(
-				auth,
-				emailRef.current.value,
-				passwordRef.current.value
-			);
-			console.log("loggedin as " + userCred.user);
-			setSuccess(true);
-			navigate("/");
+			if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+				throw new Error("Passwords do not match");
+			} else {
+				setError("");
+				setLoading(true);
+				const userCred = await createUserWithEmailAndPassword(
+					auth,
+					emailRef.current.value,
+					passwordRef.current.value
+				);
+				console.log("loggedin as " + userCred.user);
+				setSuccess(true);
+				navigate("/");
+			}
 		} catch (err) {
 			console.error(err);
 			setError(err.message);
@@ -31,23 +36,11 @@ const Login = () => {
 			setLoading(false);
 		}
 	};
-
+	
 	return (
 		<div style={{ maxWidth: "400px" }} className="card my-5 mx-auto">
-			<img
-				width="175px"
-				className="mx-auto py-5"
-				src="https://uxwing.com/wp-content/themes/uxwing/download/10-brands-and-social-media/instagram-text.svg"
-			/>
 			<form className="mx-4 card-body" onSubmit={handleSubmit}>
-				<div className="d-grid">
-					<button type="link" className="btn btn-primary btn-sm">
-						<i className="bi bi-facebook" /> Continue with Facebook
-					</button>
-				</div>
-				<div className="my-3 row justify-content-around">
-					<hr className="col-4 mt-3" /> or <hr className="col-4 mt-3" />
-				</div>
+				<h3 class="text-start card-title pt-4 pb-3">Create Account</h3>
 				{error && <div class="p-2 alert alert-danger" role="alert">
 					<i class="bi bi-exclamation-triangle-fill mx-1"></i>{error}
 				</div>}
@@ -69,21 +62,38 @@ const Login = () => {
 					ref={passwordRef}
 					required
 				/>
-				<div className="text-end my-2">
-					<Link to="/fwtpsd" className="link-primary text-decoration-none">
-						<span>Forgot password?</span>
-					</Link>
-				</div>
-				<div className="d-grid">
+				<input
+					type="password"
+					className={"form-control my-2"  + (error&&" is-invalid")}
+					minLength={6}
+					placeholder="confirm password"
+					required
+					ref={passwordConfirmRef}
+				/>
+				<div className="d-grid mt-4">
 					<button type="submit" disabled={loading} className="btn btn-primary">
 						{loading && <span class="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
-						Log In
+						Sign Up
 					</button>
 				</div>
-				<div className="mt-4 text-center text-muted">
+				<div className="my-1 row justify-content-around">
+					<hr className="col-4 mt-3" /> or <hr className="col-4 mt-3" />
+				</div>
+				<div className="fs-5">
+					<Link to="/signup/google">
+						<i class="bi bi-google mx-1"></i>
+					</Link>
+					<Link to="/signup/facebook">
+						<i class="bi bi-facebook mx-1"></i>
+					</Link>
+					<Link to="/sign/twitter">
+						<i class="bi bi-twitter mx-1"></i>
+					</Link>
+				</div>
+				<div className="mt-3 text-center text-muted">
 					<span>
-						Don't have an account?
-						<Link to="/signup" className="link-primary text-decoration-none"> Sign Up</Link>
+						Already have an account?
+						<Link to="/login" className="link-primary text-decoration-none"> Login</Link>
 					</span>
 				</div>
 			</form>
@@ -91,4 +101,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default SignUp;
