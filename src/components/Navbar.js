@@ -14,18 +14,18 @@ const Navbar = () => {
 					<ul className="navbar-nav fs-5 gap-3">
 						<div className="collapse navbar-collapse gap-2">
 							<li className="nav-item">
-								<a className="nav-link" href="#">
+								<a className="nav-link" href="#" title="home">
 									<i className="bi bi-house-door" />
 								</a>
 							</li>
 							<li className="nav-item">
 								<button
 									type="button"
-									class="btn nav-link"
+									className="btn nav-link"
 									data-bs-toggle="modal"
 									data-bs-target="#create"
 								>
-									<i class="bi bi-plus-square fs-5"></i>
+									<i className="bi bi-plus-square fs-5"></i>
 								</button>
 							</li>
 							<li className="nav-item">
@@ -71,11 +71,11 @@ const Navbar = () => {
 					<li className="nav-item">
 						<button
 							type="button"
-							class="btn nav-link"
+							className="btn nav-link"
 							data-bs-toggle="modal"
 							data-bs-target="#create"
 						>
-							<i class="bi bi-plus-square fs-5"></i>
+							<i className="bi bi-plus-square fs-5"></i>
 						</button>
 					</li>
 					<li className="nav-item">

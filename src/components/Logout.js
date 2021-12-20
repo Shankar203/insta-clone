@@ -14,12 +14,11 @@ const Logout = () => {
 	return (
 		<div className="d-inline-block py-5 fs-5">
 			{error && <div className="alert alert-danger" role="alert">
-				<i class="bi bi-exclamation-triangle-fill mx-1"></i> {error}
+				<i className="bi bi-exclamation-triangle-fill mx-1"></i> {error}
 			</div>}
 			{success && <div className="alert alert-success" role="alert">
-				<i class="bi bi-check-circle-fill mx-1"></i>
-				Logged out Successfully!
-				<Link to="/signup" className="alert-link"> Sign Up?</Link>
+				<i className="bi bi-check-circle-fill mx-1"></i>
+				Logged out Successfully! <Link to="/signup" className="alert-link">Sign Up?</Link>
 			</div>}
 		</div>
 	);

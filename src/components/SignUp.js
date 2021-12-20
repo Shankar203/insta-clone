@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 
 const SignUp = () => {
 	const navigate = useNavigate();
@@ -25,6 +26,11 @@ const SignUp = () => {
 					emailRef.current.value,
 					passwordRef.current.value
 				);
+				await setDoc(doc(db, "users", userCred.user.uid), {
+					email: userCred.user.email,
+					name: "Anonymous",
+					createdAt: serverTimestamp()
+				})
 				console.log("loggedin as " + userCred.user);
 				setSuccess(true);
 				navigate("/");
@@ -40,27 +46,29 @@ const SignUp = () => {
 	return (
 		<div style={{ maxWidth: "400px" }} className="card my-5 mx-auto">
 			<form className="mx-4 card-body" onSubmit={handleSubmit}>
-				<h3 class="text-start card-title pt-4 pb-3">Create Account</h3>
-				{error && <div class="p-2 alert alert-danger" role="alert">
-					<i class="bi bi-exclamation-triangle-fill mx-1"></i>{error}
+				<h3 className="text-start card-title pt-4 pb-3">Create Account</h3>
+				{error && <div className="p-2 alert alert-danger" role="alert">
+					<i className="bi bi-exclamation-triangle-fill mx-1"></i>{error}
 				</div>}
-				{success && <div class="p-2 alert alert-success" role="alert">
-					<i class="bi bi-check-circle-fill mx-1"></i> Success
+				{success && <div className="p-2 alert alert-success" role="alert">
+					<i className="bi bi-check-circle-fill mx-1"></i> Success
 				</div>}
 				<input
 					type="email"
 					className={"form-control my-3" + (error&&" is-invalid")}
 					placeholder="email"
-					ref={emailRef}
 					required
+					ref={emailRef}
+					disabled={loading}
 				/>
 				<input
 					type="password"
 					className={"form-control my-2"  + (error&&" is-invalid")}
 					minLength={6}
 					placeholder="password"
-					ref={passwordRef}
 					required
+					ref={passwordRef}
+					disabled={loading}
 				/>
 				<input
 					type="password"
@@ -69,10 +77,11 @@ const SignUp = () => {
 					placeholder="confirm password"
 					required
 					ref={passwordConfirmRef}
+					disabled={loading}
 				/>
 				<div className="d-grid mt-4">
 					<button type="submit" disabled={loading} className="btn btn-primary">
-						{loading && <span class="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
+						{loading && <span className="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
 						Sign Up
 					</button>
 				</div>
@@ -81,13 +90,13 @@ const SignUp = () => {
 				</div>
 				<div className="fs-5">
 					<Link to="/signup/google">
-						<i class="bi bi-google mx-1"></i>
+						<i className="bi bi-google mx-1"></i>
 					</Link>
 					<Link to="/signup/facebook">
-						<i class="bi bi-facebook mx-1"></i>
+						<i className="bi bi-facebook mx-1"></i>
 					</Link>
-					<Link to="/sign/twitter">
-						<i class="bi bi-twitter mx-1"></i>
+					<Link to="/signup/twitter">
+						<i className="bi bi-twitter mx-1"></i>
 					</Link>
 				</div>
 				<div className="mt-3 text-center text-muted">

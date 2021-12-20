@@ -48,11 +48,11 @@ const Login = () => {
 				<div className="my-3 row justify-content-around">
 					<hr className="col-4 mt-3" /> or <hr className="col-4 mt-3" />
 				</div>
-				{error && <div class="p-2 alert alert-danger" role="alert">
-					<i class="bi bi-exclamation-triangle-fill mx-1"></i>{error}
+				{error && <div className="p-2 alert alert-danger" role="alert">
+					<i className="bi bi-exclamation-triangle-fill mx-1"></i>{error}
 				</div>}
-				{success && <div class="p-2 alert alert-success" role="alert">
-					<i class="bi bi-check-circle-fill mx-1"></i> Success
+				{success && <div className="p-2 alert alert-success" role="alert">
+					<i className="bi bi-check-circle-fill mx-1"></i> Success
 				</div>}
 				<input
 					type="email"
@@ -76,7 +76,7 @@ const Login = () => {
 				</div>
 				<div className="d-grid">
 					<button type="submit" disabled={loading} className="btn btn-primary">
-						{loading && <span class="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
+						{loading && <span className="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
 						Log In
 					</button>
 				</div>

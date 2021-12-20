@@ -28,12 +28,12 @@ const ForgetPassword = () => {
 	return (
 		<div style={{ maxWidth: "400px" }} className="card my-5 mx-auto">
 			<form className="mx-4 card-body" onSubmit={handleSubmit}>
-				<h3 class="text-start card-title pt-4 pb-3">Password Reset</h3>
-				{error && <div class="p-2 alert alert-danger" role="alert">
-					<i class="bi bi-exclamation-triangle-fill mx-1"></i>{error}
+				<h3 className="text-start card-title pt-4 pb-3">Password Reset</h3>
+				{error && <div className="p-2 alert alert-danger" role="alert">
+					<i className="bi bi-exclamation-triangle-fill mx-1"></i>{error}
 				</div>}
-				{instructions && <div class="p-2 alert alert-warning" role="alert">
-					<i class="bi bi-info-circle-fill mx-1"></i>
+				{instructions && <div className="p-2 alert alert-warning" role="alert">
+					<i className="bi bi-info-circle-fill mx-1"></i>
                     { instructions }
 				</div>}
 				<input
@@ -45,7 +45,7 @@ const ForgetPassword = () => {
 				/>
 				<div className="d-grid mt-4">
 					<button type="submit" disabled={loading} className="btn btn-primary">
-						{loading && <span class="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
+						{loading && <span className="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
 						Reset Password
 					</button>
 				</div>
