@@ -1,7 +1,8 @@
-import { arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, onSnapshot, updateDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { db } from "../firebase";
+import { follow, unfollow } from "./toggle";
 
 const ProfilePage = ({ currentUser }) => {
 	const { uid } = useParams();
@@ -25,44 +26,55 @@ const ProfilePage = ({ currentUser }) => {
 			});
 		} catch (err) {
 			console.error(err);
+			setError(err.message);
+			setUserCred(null);
+			setLoading(false);
 		}
 	}, [uid]);
 
 	useEffect(async () => {
 		try {
-			setLoading(true);
-			const newFollowers = await Promise.all(
-				userCred.followers.map(async (follower) => {
-					follower = await getDoc(follower);
-					follower = { ...follower.data(), id: follower.id };
-					return follower;
-				})
-			);
-			const newFollowing = await Promise.all(
-				userCred.following.map(async (follower) => {
-					follower = await getDoc(follower);
-					follower = { ...follower.data(), id: follower.id };
-					return follower;
-				})
-			);
-            const newPosts = await Promise.all(
-                userCred.posts.map(async (post) => {
-                    post = await getDoc(post);
-                    post = { ...post.data(), id: post.id};
-                    return post;
-                })
-            );
-            setPosts(newPosts);
-			setFollowers(newFollowers);
-			setFollowing(newFollowing);
-			setLoading(false);
+			if (userCred) {
+				setLoading(true);
+				const newFollowers = await Promise.all(
+					userCred.followers.map(async (follower) => {
+						follower = await getDoc(follower);
+						follower = { ...follower.data(), id: follower.id };
+						return follower;
+					})
+				);
+				const newFollowing = await Promise.all(
+					userCred.following.map(async (follower) => {
+						follower = await getDoc(follower);
+						follower = { ...follower.data(), id: follower.id };
+						return follower;
+					})
+				);
+				const newPosts = await Promise.all(
+					userCred.posts.map(async (post) => {
+						post = await getDoc(post);
+						post = { ...post.data(), id: post.id };
+						return post;
+					})
+				);
+				setPosts(newPosts);
+				setFollowers(newFollowers);
+				setFollowing(newFollowing);
+				setLoading(false);
+			}
 		} catch (err) {
 			console.error(err);
+			setLoading(false);
 		}
 	}, [userCred]);
 
 	return (
 		<div style={{ maxWidth: 800 }} className="card my-3 mx-auto">
+			{error && (
+				<div className="alert alert-danger my-0" role="alert">
+					<i className="bi bi-exclamation-triangle-fill mx-1"></i> {error}
+				</div>
+			)}
 			{userCred && (
 				<>
 					<div className="row row-cols-2 g-2 justify-content-center">
@@ -71,7 +83,10 @@ const ProfilePage = ({ currentUser }) => {
 								width={128}
 								height={128}
 								className="rounded-circle"
-								src={userCred.profilePicURL || "https://pic.onlinewebfonts.com/svg/img_24787.png"}
+								src={
+									userCred.profilePicURL ||
+									`https://ui-avatars.com/api/name=${userCred.name || "no name"}/?background=random`
+								}
 								alt="profile-pic"
 							/>
 						</div>
@@ -80,13 +95,13 @@ const ProfilePage = ({ currentUser }) => {
 							<br />
 							<div className="fs-5 d-flex gap-3">
 								<div>
-									<b>{userCred.posts.length}</b> Posts
+									<b>{userCred.posts && userCred.posts.length}</b> Posts
 								</div>
 								<div>
-									<b>{userCred.followers.length}</b> Followers
+									<b>{userCred.followers && userCred.followers.length}</b> Followers
 								</div>
 								<div>
-									<b>{userCred.following.length}</b> Following
+									<b>{userCred.following && userCred.following.length}</b> Following
 								</div>
 							</div>
 							<sub className="text-muted">{uid}</sub>
@@ -103,7 +118,7 @@ const ProfilePage = ({ currentUser }) => {
 									role="tab"
 									aria-controls="posts-content"
 								>
-									<b>{userCred.posts.length}</b> Posts
+									<b>{userCred.posts && userCred.posts.length}</b> Posts
 								</Link>
 							</li>
 							<li className="nav-item">
@@ -115,7 +130,7 @@ const ProfilePage = ({ currentUser }) => {
 									role="tab"
 									aria-controls="followers-content"
 								>
-									<b>{userCred.followers.length}</b> Followers
+									<b>{userCred.followers && userCred.followers.length}</b> Followers
 								</Link>
 							</li>
 							<li className="nav-item">
@@ -127,7 +142,7 @@ const ProfilePage = ({ currentUser }) => {
 									role="tab"
 									aria-controls="following-content"
 								>
-									<b>{userCred.following.length}</b> Following
+									<b>{userCred.following && userCred.following.length}</b> Following
 								</Link>
 							</li>
 						</ul>
@@ -140,10 +155,10 @@ const ProfilePage = ({ currentUser }) => {
 							role="tabpanel"
 							aria-labelledby="posts"
 						>
-							<div class="row row-cols-3">
+							<div className="row row-cols-3">
 								{posts.length >= 0 &&
-									posts.slice(0, 15).map((post) => (
-										<div class="col p-1" key={post.id}>
+									posts.slice(0, 15).map(post => (
+										<div className="col p-1" key={post.id}>
 											<Link to={"/p/" + post.id}>
 												<img
 													height={200}
@@ -157,7 +172,7 @@ const ProfilePage = ({ currentUser }) => {
 									))}
 								{loading &&
 									Array(3).fill(
-										<div class="col placeholder-glow p-1">
+										<div className="col placeholder-glow p-1">
 											<span
 												style={{ height: 200, width: "100%" }}
 												className="rounded placeholder"
@@ -174,11 +189,11 @@ const ProfilePage = ({ currentUser }) => {
 							aria-labelledby="followers"
 						>
 							{followers.length > 0 &&
-								followers.slice(0, 15).map((follower) => (
+								followers.slice(0, 15).map(follower => (
 									<div
 										className="card mx-auto m-2 p-2 bg-light"
 										style={{ maxWidth: 500 }}
-										key={follower.id}
+										key={follower.id + "followers"}
 									>
 										<div className="row">
 											<div className="col-2">
@@ -188,7 +203,9 @@ const ProfilePage = ({ currentUser }) => {
 													className="rounded-circle"
 													src={
 														follower.profilePicURL ||
-														"https://pic.onlinewebfonts.com/svg/img_24787.png"
+														`https://ui-avatars.com/api/name=${
+															follower.name || "no name"
+														}/?background=random`
 													}
 													alt="profile-pic"
 												/>
@@ -247,11 +264,11 @@ const ProfilePage = ({ currentUser }) => {
 							aria-labelledby="following"
 						>
 							{following.length > 0 &&
-								following.slice(0, 15).map((follower) => (
+								following.slice(0, 15).map(follower => (
 									<div
 										className="card mx-auto m-2 p-2 bg-light"
 										style={{ maxWidth: 500 }}
-										key={follower.id}
+										key={follower.id + "following"}
 									>
 										<div className="row">
 											<div className="col-2">
@@ -261,7 +278,9 @@ const ProfilePage = ({ currentUser }) => {
 													className="rounded-circle"
 													src={
 														follower.profilePicURL ||
-														"https://pic.onlinewebfonts.com/svg/img_24787.png"
+														`https://ui-avatars.com/api/name=${
+															follower.name || "no name"
+														}/?background=random`
 													}
 													alt="profile-pic"
 												/>
@@ -309,32 +328,5 @@ const ProfilePage = ({ currentUser }) => {
 		</div>
 	);
 };
-
-async function follow(from, to, e) {
-    e.target.disabled = true;
-    from = doc(db, "users", from);
-    to = doc(db, "users", to);
-    await updateDoc(from, {
-        following: arrayUnion(to)
-    })
-    await updateDoc(to, {
-        followers: arrayUnion(from)
-    })
-    e.target.disabled = false;
-}
-
-async function unfollow(from, to, e) {
-    e.target.disabled = true;
-    from = doc(db, "users", from);
-    to = doc(db, "users", to);
-    console.log(to);
-    await updateDoc(from, {
-        following: arrayRemove(to)
-    })
-    await updateDoc(to, {
-        followers: arrayRemove(from)
-    })
-    e.target.disabled = false;
-}
 
 export default ProfilePage;

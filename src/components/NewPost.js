@@ -8,7 +8,7 @@ const NewPost = ({ currentUser }) => {
 	const navigate = useNavigate();
 	const closeRef = useRef();
 	const fileRef = useRef();
-	const commentRef = useRef();
+	const descriptionRef = useRef();
 	const [error, setError] = useState("");
 	const [progress, setProgress] = useState(0);
 	const [loading, setLoading] = useState(false);
@@ -39,9 +39,9 @@ const NewPost = ({ currentUser }) => {
 				async () => {
 					const link = await getDownloadURL(post);
 					const p = {
-						uid: currentUser.uid,
+						user: doc(db, "users", currentUser.uid),
 						link: link,
-						comments: [{uid:currentUser.uid, comment:commentRef.current.value}],
+						description: descriptionRef.current.value,
 						likes: [],
 						createdAt: serverTimestamp()
 					};
@@ -128,7 +128,7 @@ const NewPost = ({ currentUser }) => {
 								maxLength={300}
 								placeholder="Leave a comment here"
 								required
-								ref={commentRef}
+								ref={descriptionRef}
 								disabled={loading || progress==100}
 							></textarea>
 							{progress==0 || <div className="progress">

@@ -23,7 +23,7 @@ const EditProfile = ({ currentUser }) => {
 		try {
 			var user = await getDoc(doc(db, "users", currentUser.uid));
 			user = { id: user.id, ...user.data() };
-			imageRef.current.src = user.profilePicURL || "https://pic.onlinewebfonts.com/svg/img_24787.png";
+			imageRef.current.src = user.profilePicURL || `https://ui-avatars.com/api/name=${user.name ||"no name"}/?background=random`;
 			nameRef.current.value = user.name || null;
 			emailRef.current.value = user.email || null;
 			mobileRef.current.value = user.mobile || null;
@@ -77,7 +77,7 @@ const EditProfile = ({ currentUser }) => {
 							width={128}
 							height={128}
 							className="rounded-circle"
-							src="https://pic.onlinewebfonts.com/svg/img_24787.png"
+							src="https://ui-avatars.com/api/name=no name/?background=random"
 							alt="profile-pic"
 							ref={imageRef}
 						/>
@@ -93,7 +93,7 @@ const EditProfile = ({ currentUser }) => {
 						/>
 						<label htmlFor="upload">
 							<i
-								style={{ top:"115px",marginLeft:"-30px", height: "32px", width: "32px" }}
+								style={{ top:"115px",marginLeft:"-30px", height: "32px", width: "32px", cursor: "pointer" }}
 								className="bi bi-pencil-square bg-light rounded-circle border p-1 position-absolute"
 							></i>
 						</label>

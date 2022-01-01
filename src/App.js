@@ -25,20 +25,19 @@ function App() {
 	return (
 		<Router>
 			<div className="App bg-light min-vh-100">
-				<Navbar />
-				<NewPost currentUser={currentUser} />
-				
-
+						<Navbar currentUser={currentUser} />
+						<NewPost currentUser={currentUser} />
 				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/:uid" element={<ProfilePage currentUser={currentUser} />} />
-					<Route path="/profile/edit" element={<EditProfile currentUser={currentUser} />} />
-					<Route path="/p/:postId" element={<Post />} />
-					<Route path="/signup/:by" element={ <ThirdPartyAuth /> } />
+					<Route path="/" element={<PrivateRoute />}>
+						<Route path="" element={<Home currentUser={currentUser} />} />
+						<Route path=":uid" element={<ProfilePage currentUser={currentUser} />} />
+						<Route path="p/:postId" element={<Post currentUser={currentUser} />} />
+						<Route path="profile/edit" element={<EditProfile currentUser={currentUser} />} />
+					</Route>
 					<Route path="/logout" element={<Logout />} />
+					<Route path="/signup/:by" element={<ThirdPartyAuth />} />
 					<Route path="/fwtpsd" element={<ForgetPassword />} />
 					<Route path="/signup" element={<SignUp />} />
-					<Route path="/" element={<PrivateRoute />}></Route>
 					<Route path="/login" element={<Login />} />
 				</Routes>
 				{/* <header className="App-header">

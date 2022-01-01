@@ -41,9 +41,9 @@ const Login = () => {
 			/>
 			<form className="mx-4 card-body" onSubmit={handleSubmit}>
 				<div className="d-grid">
-					<button type="link" className="btn btn-primary btn-sm">
+					<Link to="/signup/facebook" type="link" className="btn btn-primary btn-sm">
 						<i className="bi bi-facebook" /> Continue with Facebook
-					</button>
+					</Link>
 				</div>
 				<div className="my-3 row justify-content-around">
 					<hr className="col-4 mt-3" /> or <hr className="col-4 mt-3" />

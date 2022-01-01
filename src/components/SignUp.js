@@ -28,7 +28,10 @@ const SignUp = () => {
 				);
 				await setDoc(doc(db, "users", userCred.user.uid), {
 					email: userCred.user.email,
-					name: "Anonymous",
+					name: "no name",
+					likes: [],
+					following: [],
+					followers: [],
 					createdAt: serverTimestamp()
 				})
 				console.log("loggedin as " + userCred.user);
