@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, TwitterAuthProvider } from "firebase/auth";
 import { auth, db } from "../firebase";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const ThirdPartyAuth = () => {
     const navigate = useNavigate();
@@ -22,15 +22,20 @@ const ThirdPartyAuth = () => {
                         : null;
         signInWithPopup(auth, provider)
             .then((p) => {
-                setDoc(doc(db, "users", p.user.uid), {
-                    email: p.user.email,
-                    name: p.user.displayName,
-                    mobile: p.user.phoneNumber,
-                    likes: [],
-					following: [],
-					followers: [],
-					createdAt: serverTimestamp()
-                })
+                getDoc(doc(db, "users", p.user.uid))
+                    .then((u) => {
+                        if (!u.exists()) {
+                            setDoc(doc(db, "users", p.user.uid), {
+                                email: p.user.email,
+                                name: p.user.displayName,
+                                mobile: p.user.phoneNumber,
+                                likes: [],
+                                following: [],
+                                followers: [],
+                                createdAt: serverTimestamp()
+                            })
+                        }
+                    })
                 setSuccess(true);
                 navigate("/");
             })

@@ -32,9 +32,9 @@ const Navbar = ({ currentUser }) => {
 								</button>
 							</li>
 							<li className="nav-item">
-								<Link className="nav-link" to="/explore" title="explore">
-									<i className="bi bi-compass" />
-								</Link>
+								{/* <Link className="nav-link" to="/explore" title="explore"> */}
+									<i className="bi bi-compass nav-link" title="explore"/>
+								{/* </Link> */}
 							</li>
 							<li className="nav-item">
 								<Link className="nav-link" to="/favourites" title="favourites">
@@ -89,9 +89,9 @@ const Navbar = ({ currentUser }) => {
 						</Link>
 					</li>
 					<li className="nav-item">
-						<Link className="nav-link" to="/explore" title="explore">
-							<i className="bi bi-compass" />
-						</Link>
+						{/* <Link className="nav-link" to="/explore" title="explore"> */}
+							<i className="bi bi-compass nav-link" title="explore"/>
+						{/* </Link> */}
 					</li>
 				</ul>
 			</nav>

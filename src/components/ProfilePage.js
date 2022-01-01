@@ -156,7 +156,7 @@ const ProfilePage = ({ currentUser }) => {
 							aria-labelledby="posts"
 						>
 							<div className="row row-cols-3">
-								{posts.length >= 0 &&
+								{posts.length > 0 &&
 									posts.slice(0, 15).map(post => (
 										<div className="col p-1" key={post.id}>
 											<Link to={"/p/" + post.id}>

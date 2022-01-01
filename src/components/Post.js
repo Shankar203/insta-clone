@@ -1,12 +1,4 @@
-import {
-	addDoc,
-	collection,
-	doc,
-	getDoc,
-	getDocs,
-	onSnapshot,
-	serverTimestamp,
-} from "firebase/firestore";
+import { query, addDoc, collection, doc, getDoc, onSnapshot, serverTimestamp, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { db } from "../firebase";
@@ -31,7 +23,8 @@ const Post = ({ currentUser }) => {
 					setError("No such post");
 				}
 			});
-			onSnapshot(collection(db, "posts", postId, "comments"), async (newComments) => {
+			const qc = query(collection(db, "posts", postId, "comments"), orderBy("createdAt", "asc"));
+			onSnapshot(qc, async (newComments) => {
 				newComments = await Promise.all(
 					newComments.docs.map(async (newComment) => {
 						newComment = { ...newComment.data(), id: newComment.id };
@@ -187,7 +180,7 @@ const Post = ({ currentUser }) => {
 											{comment.comment}
 											<br />
 											<sub className="text-muted">
-												{window.moment(comment.createdAt.toDate()).fromNow()}
+												{comment.createdAt && window.moment(comment.createdAt.toDate()).fromNow()}
 											</sub>
 										</div>
 									</div>

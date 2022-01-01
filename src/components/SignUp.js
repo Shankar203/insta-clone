@@ -29,6 +29,7 @@ const SignUp = () => {
 				await setDoc(doc(db, "users", userCred.user.uid), {
 					email: userCred.user.email,
 					name: "no name",
+					posts: [],
 					likes: [],
 					following: [],
 					followers: [],

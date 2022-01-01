@@ -18,6 +18,8 @@ import Home from "./components/Home";
 import ThirdPartyAuth from "./components/ThirdPartyAuth";
 import EditProfile from "./components/EditProfile";
 import ProfilePage from "./components/ProfilePage";
+import Chat from "./components/Chat";
+import Favourites from "./components/Favourites";
 
 function App() {
 	const [currentUser, setCurrentUser] = useState(auth.currentUser);
@@ -25,14 +27,16 @@ function App() {
 	return (
 		<Router>
 			<div className="App bg-light min-vh-100">
-						<Navbar currentUser={currentUser} />
-						<NewPost currentUser={currentUser} />
+				<Navbar currentUser={currentUser} />
+				<NewPost currentUser={currentUser} />
 				<Routes>
 					<Route path="/" element={<PrivateRoute />}>
-						<Route path="" element={<Home currentUser={currentUser} />} />
-						<Route path=":uid" element={<ProfilePage currentUser={currentUser} />} />
-						<Route path="p/:postId" element={<Post currentUser={currentUser} />} />
+						<Route path="/" element={<Home currentUser={currentUser} />} />
+						<Route path="/favourites" element={<Favourites currentUser={currentUser} />} />
+						<Route path="/chat" element={<Chat />} />
 						<Route path="profile/edit" element={<EditProfile currentUser={currentUser} />} />
+						<Route path="p/:postId" element={<Post currentUser={currentUser} />} />
+						<Route path=":uid" element={<ProfilePage currentUser={currentUser} />} />
 					</Route>
 					<Route path="/logout" element={<Logout />} />
 					<Route path="/signup/:by" element={<ThirdPartyAuth />} />
