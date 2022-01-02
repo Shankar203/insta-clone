@@ -49,8 +49,8 @@ const EditProfile = ({ currentUser }) => {
 				if (fileType[0] != "image") throw new Error("allowed file types image*");
 				if (fileSize > 4) throw new Error("file size cant exceed 4MB*");
 				const profilePic = ref(storage, "profilePics/"+uid+"."+fileType[1]);
-				profilePicURL = await getDownloadURL(profilePic);
 				await uploadBytes(profilePic, file);
+				profilePicURL = await getDownloadURL(profilePic);
 			}
 			await updateDoc(doc(db, "users", currentUser.uid), {
 				profilePicURL: profilePicURL,

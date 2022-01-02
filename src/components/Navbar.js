@@ -4,7 +4,7 @@ const Navbar = ({ currentUser }) => {
 	return (
 		<div>
 			{/* top_nav-all_screens */}
-			<nav className="navbar navbar-expand-md navbar-light bg-white sticky-top">
+			<nav className="navbar navbar-expand-md navbar-light bg-white">
 				<div className="container-sm">
 					<Link className="navbar-brand" to="/">
 						<img

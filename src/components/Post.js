@@ -106,9 +106,7 @@ const Post = ({ currentUser }) => {
 										height={40}
 										src={
 											author.profilePicURL ||
-											`https://ui-avatars.com/api/name=${
-												author.name || "no name"
-											}/?background=random`
+											`https://ui-avatars.com/api/name=${author.name || "no name"}/?background=random`
 										}
 										alt="profile-pic"
 									/>
