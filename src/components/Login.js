@@ -58,6 +58,7 @@ const Login = () => {
 					type="email"
 					className={"form-control my-3" + (error&&" is-invalid")}
 					placeholder="email"
+					defaultValue="nat@gmail.com"
 					ref={emailRef}
 					required
 				/>
@@ -66,6 +67,7 @@ const Login = () => {
 					className={"form-control my-2"  + (error&&" is-invalid")}
 					minLength={6}
 					placeholder="password"
+					defaultValue="blackwidow"
 					ref={passwordRef}
 					required
 				/>
