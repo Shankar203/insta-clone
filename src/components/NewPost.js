@@ -110,7 +110,7 @@ const NewPost = ({ currentUser }) => {
 									{error}
 								</div>
 							)}
-							{(progress==100 && !loading) && (
+							{(progress===100 && !loading) && (
 								<div className="p-2 alert alert-success" role="alert">
 									<i className="bi bi-check-circle-fill mx-1"></i> Posted Successfully
 								</div>
@@ -121,7 +121,7 @@ const NewPost = ({ currentUser }) => {
 								accept="image/*, video/*"
 								required
 								ref={fileRef}
-								disabled={loading || progress==100}
+								disabled={loading || progress===100}
 							/>
 							<textarea
 								className={"form-control my-2" + (error && " is-invalid")}
@@ -129,9 +129,9 @@ const NewPost = ({ currentUser }) => {
 								placeholder="Leave a comment here"
 								required
 								ref={descriptionRef}
-								disabled={loading || progress==100}
+								disabled={loading || progress===100}
 							></textarea>
-							{progress==0 || <div className="progress">
+							{progress===0 || <div className="progress">
 								<div
 									className="progress-bar progress-bar-striped progress-bar-animated"
 									role="progressbar"
@@ -149,7 +149,7 @@ const NewPost = ({ currentUser }) => {
 									onClick={() => uploadTask.cancel()}
 								>Cancel
 								</button> */}
-								<button type="submit" disabled={loading || progress==100} className="btn btn-primary">
+								<button type="submit" disabled={loading || progress===100} className="btn btn-primary">
 									{loading && (
 										<span
 											className="spinner-grow spinner-grow-sm mx-1"

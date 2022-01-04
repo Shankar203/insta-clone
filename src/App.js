@@ -2,8 +2,6 @@ import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 
-import logo from "./logo.svg";
-import "./App.css";
 import { auth } from "./firebase";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
@@ -26,7 +24,7 @@ function App() {
 	onAuthStateChanged(auth, (user) => setCurrentUser(user));
 	return (
 		<Router>
-			<div className="App bg-light min-vh-100">
+			<div className="App bg-light min-vh-100 text-center">
 				<Navbar currentUser={currentUser} />
 				<NewPost currentUser={currentUser} />
 				<Routes>

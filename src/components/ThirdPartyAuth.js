@@ -13,11 +13,11 @@ const ThirdPartyAuth = () => {
     
     useEffect(() => {
         const provider =
-            by == "google"
+            by === "google"
             ? new GoogleAuthProvider()
-                : by == "facebook"
+                : by === "facebook"
                 ? new FacebookAuthProvider()
-                    : by == "twitter"
+                    : by === "twitter"
                     ? new TwitterAuthProvider()
                         : null;
         signInWithPopup(auth, provider)

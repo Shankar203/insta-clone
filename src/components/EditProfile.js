@@ -46,7 +46,7 @@ const EditProfile = ({ currentUser }) => {
 				const file = imageFileRef.current.files[0];
 				const fileType = file.type.split("/");
 				const fileSize = file.size / 2 ** 20;
-				if (fileType[0] != "image") throw new Error("allowed file types image*");
+				if (fileType[0] !== "image") throw new Error("allowed file types image*");
 				if (fileSize > 4) throw new Error("file size cant exceed 4MB*");
 				const profilePic = ref(storage, "profilePics/"+uid+"."+fileType[1]);
 				await uploadBytes(profilePic, file);

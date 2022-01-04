@@ -4,7 +4,7 @@ const Navbar = ({ currentUser }) => {
 	return (
 		<div>
 			{/* top_nav-all_screens */}
-			<nav className="navbar navbar-expand-md navbar-light bg-white">
+			<nav className="navbar navbar-expand-md navbar-light bg-white fixed-top">
 				<div className="container-sm">
 					<Link className="navbar-brand" to="/">
 						<img
@@ -57,6 +57,8 @@ const Navbar = ({ currentUser }) => {
 					</ul>
 				</div>
 			</nav>
+			<div style={{ height: "60px", width: "100%" }}></div>
+			
 			{/* bottom_nav-small_screens */}
 			<nav
 				style={{ height: "40px" }}

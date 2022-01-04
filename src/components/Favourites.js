@@ -60,6 +60,7 @@ const Favourites = ({ currentUser }) => {
 						</div>
 					)}
 			</div>
+			<div style={{ height: "30px", width: "100%" }} className="d-sm-none"></div>
 		</div>
 	);
 };

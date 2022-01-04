@@ -1,4 +1,4 @@
-import { collection, limit, onSnapshot, getDocs, orderBy, query, getDoc } from "firebase/firestore";
+import { collection, limit, getDocs, orderBy, query, getDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
@@ -34,9 +34,9 @@ const Home = ({ currentUser }) => {
 
 	// ifinite scrolling
 	window.onscroll = () => {
-		const st = document.documentElement['scrollTop'];
-		const sh = document.documentElement['scrollHeight'];
-		const ch = document.documentElement['clientHeight'];
+		const st = document.documentElement['scrollTop'] || document.body['scrollTop'];
+		const sh = document.documentElement['scrollHeight'] || document.body['scrollHeight'];
+		const ch = document.documentElement['clientHeight'] || document.body['clientHeight'];
 		const scrollPercent = st / (sh-ch) * 100;
 		if (scrollPercent >= 100 && posts.length>=postsLimit) setPostsLimit(oldLimit => oldLimit + 6);
 	}
@@ -137,6 +137,7 @@ const Home = ({ currentUser }) => {
 					</div>
 				</div>
 			)}
+			<div style={{ height: "30px", width: "100%" }} className="d-sm-none"></div>
 		</div>
 	);
 };

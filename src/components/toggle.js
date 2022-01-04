@@ -33,7 +33,7 @@ async function likePost(uid, postId, e) {
     e.target.disabled = true;
     const user = doc(db, "users", uid);
     const post = doc(db, "posts", postId);
-    if (e.target.id == "fill") {
+    if (e.target.id === "fill") {
         e.target.className = "bi bi-heart";
         e.target.id = "empty";
         await updateDoc(post, {
@@ -42,7 +42,7 @@ async function likePost(uid, postId, e) {
         await updateDoc(user, {
             likes: arrayRemove(post)
         })
-    }else if (e.target.id == "empty") {
+    }else if (e.target.id === "empty") {
         e.target.className = "bi bi-heart-fill text-danger";
         e.target.id = "fill";
         await updateDoc(post, {

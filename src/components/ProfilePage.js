@@ -90,10 +90,10 @@ const ProfilePage = ({ currentUser }) => {
 						<i className="bi bi-exclamation-triangle-fill mx-1"></i> {error}
 					</div>
 				)}
-				{userCred && currentUser && (
+				{userCred && loginCred && currentUser && (
 					<>
 						<div className="row row-cols-2 g-2 justify-content-center">
-							<div className="col-sm-3 my-3">
+							<div className="col-sm-3 my-3 text-center">
 								<img
 									width={128}
 									height={128}
@@ -108,7 +108,34 @@ const ProfilePage = ({ currentUser }) => {
 								/>
 							</div>
 							<div className="form-floating col-8 my-3 px-3 d-none d-sm-block text-start">
-								<div className="fs-3 fw-bold">{userCred.name || userCred.email}</div>
+								<div className="fs-3 fw-bold">
+									{userCred.name || userCred.email}{" "}
+									{currentUser.uid === userCred.id && (
+										<Link
+											type="button"
+											to="/profile/edit"
+											className="btn btn-outline-secondary btn-sm"
+										>
+											Edit Profile
+										</Link>
+									)}
+									{currentUser.uid !== userCred.id && (loginCred.following.map((f) => f.id).includes(userCred.id) ? (
+										<button
+											className="btn btn-outline-danger btn-sm"
+											onClick={(e) => unfollow(currentUser.uid, userCred.id, e)}
+										>
+											Unfollow
+										</button>
+									) : (
+										<button
+											className="btn btn-primary btn-sm"
+											onClick={(e) => follow(currentUser.uid, userCred.id, e)}
+											disabled={currentUser.uid === userCred.id}
+										>
+											Follow
+										</button>
+									))}
+								</div>
 								<br />
 								<div className="fs-5 d-flex gap-3">
 									<div>
@@ -123,8 +150,23 @@ const ProfilePage = ({ currentUser }) => {
 								</div>
 								<sub className="text-muted">{uid}</sub>
 							</div>
-							<div className="col-1 my-3 fs-3">
-								<Link className="link-secondary" to="/logout"><i className="bi bi-box-arrow-right"></i></Link>
+							<div className="col-1 my-3 fs-3 d-none d-sm-block">
+								{currentUser.uid === userCred.id && (
+									<Link className="link-secondary" to="/logout">
+										<i className="bi bi-box-arrow-right"></i>
+									</Link>
+								)}
+							</div>
+						</div>
+						<div className="m-2 text-start d-flex justify-content-between d-sm-none">
+							<div className="fw-bold py-1">{userCred.name || userCred.email}</div>
+							<div>
+								<Link type="button" to="/profile/edit" className="btn btn-outline-secondary btn-sm">
+									Edit Profile
+								</Link>
+								<Link className="link-secondary" to="/logout">
+									<i className="bi bi-box-arrow-right fs-4 p-1"></i>
+								</Link>
 							</div>
 						</div>
 						<nav>
@@ -245,7 +287,7 @@ const ProfilePage = ({ currentUser }) => {
 														<button
 															className="btn btn-primary"
 															onClick={(e) => follow(currentUser.uid, follower.id, e)}
-															disabled={currentUser.uid == follower.id}
+															disabled={currentUser.uid === follower.id}
 														>
 															Follow
 														</button>
@@ -321,7 +363,7 @@ const ProfilePage = ({ currentUser }) => {
 														<button
 															className="btn btn-primary"
 															onClick={(e) => follow(currentUser.uid, follower.id, e)}
-															disabled={currentUser.uid == follower.id}
+															disabled={currentUser.uid === follower.id}
 														>
 															Follow
 														</button>

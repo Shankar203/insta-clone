@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "frontend-c6720"
-  }
+    "default": "insta-clone-2021",
+    "hosting": "insta-clone-2021"
+  },
+  "targets": {}
 }
