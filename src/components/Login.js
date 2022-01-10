@@ -44,7 +44,7 @@ const Login = () => {
 				</Link>
 				<form className="mx-4 card-body" onSubmit={handleSubmit}>
 					<div className="d-grid">
-						<Link to="/signup/facebook" type="link" className="btn btn-primary btn-sm">
+						<Link to="/signup/google" type="link" className="btn btn-primary btn-sm">
 							<i className="bi bi-google" /> Continue with Google
 						</Link>
 					</div>

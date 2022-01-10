@@ -160,7 +160,32 @@ const ProfilePage = ({ currentUser }) => {
 						</div>
 						<div className="my-3 mx-2 text-start d-flex justify-content-between d-sm-none">
 							<div className="fw-bold p-1">
-								{userCred.name || userCred.email} <Link type="button" to="/profile/edit" className="btn btn-outline-secondary btn-sm py-0">Edit Profile</Link>
+								{userCred.name || userCred.email}{" "}
+									{currentUser.uid === userCred.id && (
+										<Link
+											type="button"
+											to="/profile/edit"
+											className="btn btn-outline-secondary btn-sm py-0"
+										>
+											Edit Profile
+										</Link>
+									)}
+									{currentUser.uid !== userCred.id && (loginCred.following.map((f) => f.id).includes(userCred.id) ? (
+										<button
+											className="btn btn-outline-danger btn-sm py-0"
+											onClick={(e) => unfollow(currentUser.uid, userCred.id, e)}
+										>
+											Unfollow
+										</button>
+									) : (
+										<button
+											className="btn btn-primary btn-sm py-0"
+											onClick={(e) => follow(currentUser.uid, userCred.id, e)}
+											disabled={currentUser.uid === userCred.id}
+										>
+											Follow
+										</button>
+									))}
 							</div>
 							<Link className="link-secondary" to="/logout">
 								<i className="bi bi-box-arrow-right fs-4 p-1"></i>
