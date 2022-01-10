@@ -38,7 +38,7 @@ const Home = ({ currentUser }) => {
 		const sh = document.documentElement['scrollHeight'] || document.body['scrollHeight'];
 		const ch = document.documentElement['clientHeight'] || document.body['clientHeight'];
 		const scrollPercent = st / (sh-ch) * 100;
-		if (scrollPercent >= 100 && posts.length>=postsLimit) setPostsLimit(oldLimit => oldLimit + 6);
+		if (scrollPercent >= 95 && posts.length>=postsLimit) setPostsLimit(oldLimit => oldLimit + 3);
 	}
 
 	return (

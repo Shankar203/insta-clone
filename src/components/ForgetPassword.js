@@ -26,36 +26,38 @@ const ForgetPassword = () => {
 	};
 	
 	return (
-		<div style={{ maxWidth: "400px" }} className="card my-5 mx-auto">
-			<form className="mx-4 card-body" onSubmit={handleSubmit}>
-				<h3 className="text-start card-title pt-4 pb-3">Password Reset</h3>
-				{error && <div className="p-2 alert alert-danger" role="alert">
-					<i className="bi bi-exclamation-triangle-fill mx-1"></i>{error}
-				</div>}
-				{instructions && <div className="p-2 alert alert-warning" role="alert">
-					<i className="bi bi-info-circle-fill mx-1"></i>
-                    { instructions }
-				</div>}
-				<input
-					type="email"
-					className={"form-control my-3" + (error&&" is-invalid") + (instructions&&" is-valid")}
-					placeholder="email"
-					ref={emailRef}
-					required
-				/>
-				<div className="d-grid mt-4">
-					<button type="submit" disabled={loading} className="btn btn-primary">
-						{loading && <span className="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
-						Reset Password
-					</button>
-				</div>
-				<div className="mt-3 text-center text-muted">
-					<span>
-						Want a new account?
-						<Link to="/signup" className="link-primary text-decoration-none"> SignUp</Link>
-					</span>
-				</div>
-			</form>
+		<div className="h-100 py-5">
+			<div style={{ maxWidth: "400px" }} className="card mx-auto">
+				<form className="mx-4 card-body" onSubmit={handleSubmit}>
+					<h3 className="text-start card-title pt-4 pb-3">Password Reset</h3>
+					{error && <div className="p-2 alert alert-danger" role="alert">
+						<i className="bi bi-exclamation-triangle-fill mx-1"></i>{error}
+					</div>}
+					{instructions && <div className="p-2 alert alert-warning" role="alert">
+						<i className="bi bi-info-circle-fill mx-1"></i>
+	                    { instructions }
+					</div>}
+					<input
+						type="email"
+						className={"form-control my-3" + (error&&" is-invalid") + (instructions&&" is-valid")}
+						placeholder="email"
+						ref={emailRef}
+						required
+					/>
+					<div className="d-grid mt-4">
+						<button type="submit" disabled={loading} className="btn btn-primary">
+							{loading && <span className="spinner-grow spinner-grow-sm mx-1" role="status" aria-hidden="true"></span>}
+							Reset Password
+						</button>
+					</div>
+					<div className="mt-3 text-center text-muted">
+						<span>
+							Want a new account?
+							<Link to="/signup" className="link-primary text-decoration-none"> SignUp</Link>
+						</span>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 };

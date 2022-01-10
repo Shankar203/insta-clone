@@ -158,16 +158,13 @@ const ProfilePage = ({ currentUser }) => {
 								)}
 							</div>
 						</div>
-						<div className="m-2 text-start d-flex justify-content-between d-sm-none">
-							<div className="fw-bold py-1">{userCred.name || userCred.email}</div>
-							<div>
-								<Link type="button" to="/profile/edit" className="btn btn-outline-secondary btn-sm">
-									Edit Profile
-								</Link>
-								<Link className="link-secondary" to="/logout">
-									<i className="bi bi-box-arrow-right fs-4 p-1"></i>
-								</Link>
+						<div className="my-3 mx-2 text-start d-flex justify-content-between d-sm-none">
+							<div className="fw-bold p-1">
+								{userCred.name || userCred.email} <Link type="button" to="/profile/edit" className="btn btn-outline-secondary btn-sm py-0">Edit Profile</Link>
 							</div>
+							<Link className="link-secondary" to="/logout">
+								<i className="bi bi-box-arrow-right fs-4 p-1"></i>
+							</Link>
 						</div>
 						<nav>
 							<ul className="nav nav-tabs justify-content-evenly justify-content-sm-start">

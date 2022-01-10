@@ -24,11 +24,15 @@ function App() {
 	onAuthStateChanged(auth, (user) => setCurrentUser(user));
 	return (
 		<Router>
-			<div className="App bg-light min-vh-100 text-center">
-				<Navbar currentUser={currentUser} />
-				<NewPost currentUser={currentUser} />
+			<div className="bg-light min-vh-100 text-center">
 				<Routes>
-					<Route path="/" element={<PrivateRoute />}>
+					<Route path="/" element={
+						<>
+							<Navbar currentUser={currentUser} />
+							<NewPost currentUser={currentUser} />
+							<PrivateRoute />
+						</>
+					}>
 						<Route path="/" element={<Home currentUser={currentUser} />} />
 						<Route path="/favourites" element={<Favourites currentUser={currentUser} />} />
 						<Route path="/chat" element={<Chat />} />
@@ -42,21 +46,6 @@ function App() {
 					<Route path="/signup" element={<SignUp />} />
 					<Route path="/login" element={<Login />} />
 				</Routes>
-				{/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <button type="button" className="btn btn-primary">Primary</button>
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header> */}
 			</div>
 		</Router>
 	);
